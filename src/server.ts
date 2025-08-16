@@ -9,6 +9,7 @@ import {
 import { fastifySwagger } from "@fastify/swagger";
 import { fastifySwaggerUi } from "@fastify/swagger-ui";
 import { routes } from "./routes";
+import { rabbitPlugin } from "./plugins/rabbitmq";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
@@ -35,6 +36,7 @@ app.register(fastifySwaggerUi, {
 });
 
 app.register(routes)
+app.register(rabbitPlugin)
 
 app.listen({ port: env.PORT }).then(() => {
   console.log(`[🚀] Sankofa.AI API rodando na porta: ${env.PORT}`);
