@@ -1,22 +1,4 @@
 services:
-  postgres:
-    image: bitnami/postgresql:17
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRESQL_USER: postgres
-      POSTGRESQL_PASSWORD: postgres
-      POSTGRESQL_DATABASE: snkai_database
-    volumes:
-      - pg:/var/lib/postgresql
-  
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080
-    depends_on:
-      - postgres
-
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -26,8 +8,3 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-
-volumes:
-  pg:
-    driver: local
-    
