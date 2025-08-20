@@ -2,11 +2,22 @@ import { db } from "@/lib/firebase";
 import { AIResult, AIResultWithId } from "@/types";
 import { Timestamp } from "firebase-admin/firestore";
 
-export async function getAIResults(): Promise<AIResultWithId[]> {
+interface GetAIResultsParams {
+  page: number;
+  limit: number;
+}
+
+export async function getAIResults({
+  page,
+  limit,
+}: GetAIResultsParams): Promise<AIResultWithId[]> {
   try {
+    const offset = (page - 1) * limit;
     const snapshot = await db
       .collection("ai_results")
       .orderBy("collectedAt", "asc")
+      .limit(limit)
+      .offset(offset)
       .get();
 
     const aiResults = snapshot.docs.map((doc) => {
