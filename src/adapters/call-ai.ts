@@ -1,13 +1,13 @@
-import { aiResultClassificationEnum } from "@/db/schema"
+import { AIResultClassificationEnum } from "@/types"
 
 interface CallAIResponse {
-    classification: typeof aiResultClassificationEnum.enumValues[number]
+    classification: AIResultClassificationEnum
     confidence: number
 }
 
 export async function callAI(text: string): Promise<CallAIResponse> {
     return {
-        classification: 'racist',
+        classification: AIResultClassificationEnum.RACIST,
         confidence: 0.89
     }
 }

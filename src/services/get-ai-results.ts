@@ -1,12 +1,27 @@
-import { db } from "@/db";
-import { AIResult, aiResultsTable } from "@/db/schema";
+import { db } from "@/lib/firebase";
+import { AIResult, AIResultWithId } from "@/types";
+import { Timestamp } from "firebase-admin/firestore";
 
-export async function getAIResults(): Promise<AIResult[]> {
+export async function getAIResults(): Promise<AIResultWithId[]> {
   try {
-    const aiResults = await db
-      .select()
-      .from(aiResultsTable)
-      .orderBy(aiResultsTable.collectedAt);
+    const snapshot = await db
+      .collection("ai_results")
+      .orderBy("collectedAt", "asc")
+      .get();
+
+    const aiResults = snapshot.docs.map((doc) => {
+      const data = doc.data() as AIResult;
+      const collectedAt =
+        data.collectedAt instanceof Timestamp
+          ? data.collectedAt.toDate()
+          : new Date(data.collectedAt);
+
+      return {
+        id: doc.id,
+        ...data,
+        collectedAt,
+      } as AIResultWithId;
+    });
 
     return aiResults;
   } catch (error) {
