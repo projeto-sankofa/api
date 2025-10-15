@@ -21,8 +21,8 @@ export type Comment = {
 }
 
 export enum AIResultClassificationEnum {
-  RACIST = "racist",
-  NON_RACIST = "non_racist"
+  RACIST = "Racista",
+  NON_RACIST = "Não racista"
 }
 
 export type AIResult = {

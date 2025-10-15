@@ -4,13 +4,14 @@ import { Comment } from "@/types";
 
 export async function processComments(comment: Comment): Promise<void> {
   try {
-    const { classification, confidence } = await callAI(comment.content);
+    const { label, score } = await callAI(comment.content);
 
     await db.collection("ai_results").add({
       text: comment.content,
-      classification: classification,
-      confidence: confidence,
+      classification: label,
+      confidence: score,
       source: comment.source,
+      collectedAt: new Date(),
     })
   } catch (error) {
     console.error("Error processing comment:", error);
