@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "crawler:bluesky": "tsx src/crawlers/bluesky.ts"
     "seed": "tsx --tsconfig ./tsconfig.json src/scripts/seed-firestore.ts"
   },
   "keywords": [],
@@ -12,6 +13,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.10.0",
   "dependencies": {
+    "@atproto/api": "^0.17.3",
     "@fastify/cors": "^11.1.0",
     "@fastify/swagger": "^9.5.1",
     "@fastify/swagger-ui": "^5.2.3",
