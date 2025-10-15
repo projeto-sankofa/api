@@ -6,7 +6,10 @@ const envSchema = z.object({
     FIREBASE_PRIVATE_KEY: z.string(),
     FIREBASE_PROJECT_ID: z.string(),
     FIREBASE_CLIENT_EMAIL: z.string(),
-    RABBITMQ_URI: z.string() 
+    RABBITMQ_URI: z.string(),
+    RABBITMQ_QUEUE: z.string(),
+    BLUESKY_IDENTIFIER: z.string(),
+    BLUESKY_PASSWORD: z.string(), 
 })
 
 export const env = envSchema.parse(process.env)

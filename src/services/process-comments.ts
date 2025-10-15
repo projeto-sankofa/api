@@ -13,6 +13,6 @@ export async function processComments(comment: Comment): Promise<void> {
       source: comment.source,
     })
   } catch (error) {
-    throw new Error()
+    console.error("Error processing comment:", error);
   }
 }
