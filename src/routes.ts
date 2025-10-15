@@ -18,13 +18,18 @@ export async function routes(app: FastifyTypedInstance) {
       schema: {
         tags: ["ai-results"],
         description: "Fetch all AI results",
+        querystring: z.object({
+          page: z.coerce.number().default(1),
+          limit: z.coerce.number().default(10),
+        }),
         response: {
           200: z.array(aiResultSchema),
         },
       },
     },
-    async () => {
-      const aiResults = await getAIResults();
+    async (req) => {
+      const { page, limit } = req.query;
+      const aiResults = await getAIResults({ page, limit });
 
       return aiResults;
     }

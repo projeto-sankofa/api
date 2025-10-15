@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "crawler:bluesky": "tsx src/crawlers/bluesky.ts"
+    "seed": "tsx --tsconfig ./tsconfig.json src/scripts/seed-firestore.ts"
   },
   "keywords": [],
   "author": "",
